@@ -3,18 +3,7 @@ div.all_blocks {
 	width: 80%;
 	margin: 0 auto;
 }
-div.shortcuts {
-	float:  left;
-}
-a.shortcuts {
-	color: black;
-	text-decoration: none;
-	transition: all .1s;
-	line-height: 2em;
-}
-a.shortcuts:hover {
-	color: red;
-}
+
 div.red_fields {
 	width: 70%;
 	margin: 0 auto;

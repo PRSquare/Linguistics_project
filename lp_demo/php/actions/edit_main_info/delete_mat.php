@@ -3,7 +3,7 @@
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 
-	require_once "get_pb_path.php";
+	require_once "../../get_pb_path.php";
 	require_once "../../mysql_connect.php";
 	require_once "../../load_file.php";
 

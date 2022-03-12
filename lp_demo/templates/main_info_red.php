@@ -1,12 +1,5 @@
 <div class="all_blocks">
-	<div class="shortcuts">
-		<a class="shortcuts" href="#dates">Даты</a><br>
-		<a class="shortcuts" href="#programs">Программки</a><br>
-		<a class="shortcuts" href="#mats_list">Сборники материалов</a><br>
-		<a class="shortcuts" href="#photos">Фотографии</a><br>
-		<a class="shortcuts" href="#videos">Видео</a><br>
-		<a class="shortcuts" href="#partners">Партнёры</a><br>
-	</div>
+	<?=$shortcuts_template?>
 	<div class="red_fields">
 		<div class="data_red" name="dates">
 			<form method="POST" action="php/actions/edit_main_info/edit_date.php">
@@ -52,17 +45,5 @@
 </div>
 
 <script>
-	const anchors = document.querySelectorAll('a[href*="#"]')
-	anchors.forEach((anchor) => {
-	  anchor.addEventListener('click', function (e) {
-	    e.preventDefault()
-	    
-	    const blockID = anchor.getAttribute('href').substr(1)
-	    
-	    document.getElementById(blockID).scrollIntoView({
-	      behavior: 'smooth',
-	      block: 'start'
-	    })
-	  })
-	})
+	enableSmoothScroll();
 </script>

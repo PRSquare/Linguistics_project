@@ -38,6 +38,17 @@
 	$conf_videos = safety_db_query( $db_link, "SELECT * FROM video_conf WHERE ID_conf = ?", "i", $curid );
 	$partners = safety_db_query( $db_link, "SELECT * FROM partners WHERE ID_conf = ?", "i", $curid );
 
+	$chapters = [
+		['dates', 'Даты'],
+		['programs', 'Программки'],
+		['mats_list', 'Сборники материалов'],
+		['photos', 'Фотографии'],
+		['videos', 'Видео'],
+		['partners', 'Партнёры']
+	];
+	$shortcuts_template = renderTemplate( "templates/nav_template.php", ['chapters' => $chapters] );
+
+
 	$imp_dates = renderTemplate( "templates/edit_main_info/important_dates.php", ['dates' => $dates, 'conf_id' => $curid ]);
 	$progs_inf_lets = renderTemplate( "templates/edit_main_info/progs_info_letters.php", ['programs' => $prog_letters, 'conf_id' => $curid ] );
 	$mats_template = renderTemplate( "templates/edit_main_info/mats.php", [ 'mats' => $mats, 'conf_id' => $curid ] );
@@ -46,6 +57,7 @@
 	$partners_template = renderTemplate( "templates/edit_main_info/partners.php", [ 'partners' => $partners, 'conf_id' => $curid ] );
 
 	$content = renderTemplate("templates/main_info_red.php", [ 'mdid' => $conf_date['ID_date'], 'begin_date' => $conf_date['date_from'], 'end_date' => $conf_date['date_to'],
+		'shortcuts_template' => $shortcuts_template,
 		'important_dates_template' => $imp_dates,
 		'programs_info_letters_template' => $progs_inf_lets,
 		'mats_template' => $mats_template,
@@ -53,8 +65,8 @@
 		'videos_template' => $videos_template,
 		'partners_template' => $partners_template ]);
 
-	$op_css = ['css/main_info_red.css'];
-	$op_js = ['js/main_info_red.css'];
+	$op_css = ['css/main_info_red.css', 'css/nav_template.css'];
+	$op_js = ['js/main_info_red.css', 'js/nav_template.js'];
 
 	$layout = renderTemplate("templates/layout.php", ['title' => "Редактирование", 'current_page' => 'Редактирование', 
 		'opt_css_files' => $op_css, 'opt_js_files' => $op_js, 'content' => $content]);

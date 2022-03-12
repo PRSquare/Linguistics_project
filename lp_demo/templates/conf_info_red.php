@@ -11,7 +11,10 @@
 	}
 </style>
 
+<?= $nav_template?>
+
 <div id="content">
+	<h1>Конференция <?=$conf_date?></h1>
 	<?= $name_and_conception_template ?>
 	<hr>
 	<?= $announcement_template ?>
@@ -25,15 +28,12 @@
 
 
 
-	<form action="" method="post">
-		<div id="test_editor">
-	    	<textarea class="editor" name="editor">
-	        	<p>Hello <strong>CKEditor</strong></p>
-	    	</textarea>
-	    </div>
-	    <script>
-	    	var editors_list = document.querySelectorAll('.editor');
-	    	editors_list.forEach( el => ClassicEditor.create( el ) );
-	    </script>    
-	</form>
+    <script>
+    	var editors_list = document.querySelectorAll('.editor');
+    	editors_list.forEach( el => ClassicEditor.create( el ) );
+    </script>
 </div>
+
+<script>
+	enableSmoothScroll();
+</script>

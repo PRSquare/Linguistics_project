@@ -36,7 +36,19 @@
 	$speakers_template = renderTemplate( "templates/conf_info_red/speakers.php", [ 'speakers' => $speakers, 'suffix' => $suffix ] );
 	$reviews_template = renderTemplate( "templates/conf_info_red/reviews.php", [ 'reviews' => $reviews, 'suffix' => $suffix ] );
 
+	$conf_date = safety_db_query( $db_link, "SELECT date_from FROM dates WHERE ID_conf = ? AND text_en REGEXP '^Conference [0-9]{4}$'", "i", $curid )[0]['date_from'];
+
+	$nav = [
+		['conf_announcement', 'Анонс'],
+		['conf_info', 'Информация'],
+		['conf_speakers', 'Спикеры'],
+		['conf_feedback', 'Отзывы']
+	];
+	$nav_template = renderTemplate( "templates/nav_template.php", ['chapters' => $nav] );
+
 	$content = renderTemplate( "templates/conf_info_red.php", [
+		'conf_date' => $conf_date,
+		'nav_template' => $nav_template,
 		'name_and_conception_template' => $name_and_conception_template,
 		'announcement_template' => $announcement_template,
 		'about_conf_template' => $about_conf_template,
@@ -44,9 +56,10 @@
 		'reviews_template' => $reviews_template
 	] );
 	$CKEDITIOR_LINK = "https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js";
-	$ojf = [$CKEDITIOR_LINK];
+	$ojf = [$CKEDITIOR_LINK, 'js/nav_template.js'];
+	$ocss = ['css/nav_template.css'];
 	
-	$page = renderTemplate( "templates/layout.php", ['title' => 'title', 'content' => $content, 'opt_js_files' => $ojf, 'opt_css_files' => [],
+	$page = renderTemplate( "templates/layout.php", ['title' => 'title', 'content' => $content, 'opt_js_files' => $ojf, 'opt_css_files' => $ocss,
 		'current_page' => 'Редактирование' ] );
 
 	print($page);
