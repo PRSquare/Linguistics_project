@@ -1,0 +1,87 @@
+div.all_blocks {
+	padding-top: 50px;
+	width: 80%;
+	margin: 0 auto;
+}
+div.shortcuts {
+	float:  left;
+}
+a.shortcuts {
+	color: black;
+	text-decoration: none;
+	transition: all .1s;
+	line-height: 2em;
+}
+a.shortcuts:hover {
+	color: red;
+}
+div.red_fields {
+	width: 70%;
+	margin: 0 auto;
+}
+
+/* Стили полей редактирования */
+
+input {
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
+.red_block {
+	text-align: center;
+	align-items: center;
+	align-content: center;
+}
+.red_fields h2 {
+	text-align: center;
+	font-size: 25px;
+}
+.red_fields div {
+	margin-bottom: 50px;
+}
+.text_ru {
+	color: blue;
+}
+.text_en {
+	color: red;
+}
+.importamt_dates {
+	text-align: center
+}
+.info {
+	display: inline-block;
+	font-style: italic;
+	color: #664;
+	background: #FEC;
+	padding: 5px;
+	border-radius: 10px;
+}
+.fullwblock {
+	text-align: left;
+}
+.fullwblock input {
+}
+
+.sss {
+	width: 50%;
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}
+
+.sss div {
+	
+}
+
+hr {
+	margin-bottom: 30px;
+}
+
+.accept {
+	width: 1.5em;
+	cursor: pointer;
+}
+
+.file_name {
+	color: #39F;
+}
