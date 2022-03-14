@@ -33,8 +33,7 @@
 			$speaker_id
 		);
 		
-		if( !empty($_FILES['photo']) ) {
-
+		if( $_FILES['photo']['size'] != 0 ) {
 			$folder_name;
 
 			$photo_path = get_pb_path($conf_id, $db_link, $folder_name, "speakers");		
