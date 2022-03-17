@@ -3,7 +3,7 @@
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 
-	require "../../php/mysql_connect.php";
+	require "../php/mysql_connect.php";
 
 	$db_link = connectToDB();
 
@@ -26,4 +26,5 @@
 	} else {
 		print( "User not set!" );
 	}
+	header("Location: /");
 ?>
