@@ -20,5 +20,5 @@
 		session_start();
 		$_SESSION['user'] = $user_id;
 	}
-	header("Location: ".$_SERVER['HTTP_REFERER']);
+	header("Location: /");
 ?>

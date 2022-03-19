@@ -28,6 +28,11 @@
 <form id="delete_conf" method="POST" action="php/delete_conf.php">
 	<input id='conf_id' type="hidden" name='conf_id' value=''>
 </form>
+
+<!-- <form id="delete_conf" method="GET" action="konf/delete_conf.php">
+	<input id='conf_id' type="hidden" name='id' value=''>
+</form> -->
+
 <div id="hidden_message">
 	<div class="hidden_message__message">
 		<span>Вы уверены, что хотите удалить конференцию?</span>

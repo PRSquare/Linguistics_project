@@ -44,6 +44,10 @@
 	}
 
 	function recursiveRemoveDir($dir) {
+		if (!file_exists($dir) || !is_dir($dir)) {
+		 	return;
+		}
+		chmod($dir, 0777 );
 		$includes = glob($dir.'/*');
 			foreach ($includes as $include) {
 				if(is_dir($include)) {
