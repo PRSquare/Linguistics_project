@@ -8,7 +8,7 @@
 	try {
 		$db_link = connectToDB();
 	} catch (Exception $e) {
-		print("Error");
+		header("Location: ".$_SERVER['HTTP_REFERER']."?status=failure");
 	}
 
 	session_start();
@@ -17,7 +17,7 @@
 		header("Location: /sign_in.php");
 	}
 	try {
-		$prev = prev_check($_SESSION['user']);
+		$prev = prev_check($db_link, $_SESSION['user']);
 		if ($prev != 1) {
 			header("Location: /sign_in.php");
 		}
@@ -33,6 +33,9 @@
 			$color = 'lightgreen';
 		} else {
 			$message = 'Не удалось добавить пользователя';
+			if( isset( $_GET['reason'] ) ) {
+				$message .= '</span><br><span>('.$_GET['reason'].")";
+			}
 			$color = 'red';
 		}
 	}

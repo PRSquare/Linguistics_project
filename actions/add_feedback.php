@@ -29,9 +29,13 @@
 		$rating = $_POST['rating'];
 
 		safety_db_query( $db_link, 
-			"INSERT INTO feedback ( Name_feedback_".$suffix.", post_".$suffix.", feedback_".$suffix.", ID_conf, rating ) VALUES (?, ?, ?, ?, ?)", 
-			"sssii", 
-			$name, $position, $text, $conf_id, $rating
+			"INSERT INTO feedback  VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)", 
+			"ssssssii", 
+			$name, $name,
+			$position, $position,
+			$text, $text, 
+			$conf_id, 
+			$rating
 		);
 
 	}

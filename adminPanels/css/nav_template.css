@@ -1,4 +1,5 @@
 div.shortcuts {
+	position: fixed;
 	float:  left;
 }
 a.shortcuts {

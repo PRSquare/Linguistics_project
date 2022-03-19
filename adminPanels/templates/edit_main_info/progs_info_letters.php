@@ -60,10 +60,11 @@
 
 	<div class="inf_list">
 		<?php 
+			$i = 1;
 			foreach ( $programs as $prog ) {
 				print("
 				<div class='prog_el list_el'>
-					<h3>Программка ".$prog['ID_playbill']."</h3>
+					<h3>Программка ".$i."</h3>
 					<span class=\"text_ru\">Название</span>
 					<br>
 					<form method='POST' action = 'php/actions/edit_main_info/edit_program.php'>
@@ -83,7 +84,7 @@
 						<input type='hidden' name='prog_id' value='".$prog['ID_playbill']."'>
 						<input type='hidden' name='conf_id' value='".$conf_id."'>
 
-						<span class=\"file_name\">".$prog['name_playbill_ru']."</span>
+						<a class=\"file_name\" href='".$prog['road_ru']."'>".$prog['name_playbill_ru']."</a>
 						<input required type=\"file\" name=\"file_ru\">
 						<input class=\"submit_button\" type=\"submit\" name=\"sub_conf\" value=\"\">
 					</form>
@@ -112,7 +113,7 @@
 						<input type='hidden' name='prog_id' value='".$prog['ID_playbill']."'>
 						<input type='hidden' name='conf_id' value='".$conf_id."'>
 
-						<span class=\"file_name\">".$prog['name_playbill_en']."</span>
+						<a class=\"file_name\" href='".$prog['road_en']."'>".$prog['name_playbill_en']."</a>
 						<input required type=\"file\" name=\"file_en\">
 						<input class=\"submit_button\" type=\"submit\" name=\"sub_conf\" value=\"\">
 					</form>
@@ -124,6 +125,7 @@
 				</div>
 				<div class=\"small_separator\"></div>
 				");
+				++$i;
 			}
 		?>
 	</div>

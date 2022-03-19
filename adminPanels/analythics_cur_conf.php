@@ -8,13 +8,21 @@
 	require "php/prev_check.php";
 
 
+	$db_link;
+
+	try {
+		$db_link = connectToDB();
+	} catch (Exception $e) {
+		header("Location: ".$_SERVER['HTTP_REFERER']."?status=failure");
+	}
+
 	session_start();
 
 	if( !isset($_SESSION['user']) ) {
 		header("Location: /sign_in.php");
 	}
 	try {
-		$prev = prev_check($_SESSION['user']);
+		$prev = prev_check($db_link, $_SESSION['user']);
 		if ($prev != 1) {
 			header("Location: /sign_in.php");
 		}

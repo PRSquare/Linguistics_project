@@ -5,18 +5,32 @@
 
 	require "../../mysql_connect.php";
 
+	require_once "../../prev_check.php";
+
 	$db_link;
 
 	try {
 		$db_link = connectToDB();
 	} catch (Exception $e) {
-		print_r($e);
-	};
+		header("Location: ".$_SERVER['HTTP_REFERER']."?status=failure");
+	}
+
+	session_start();
+
+	if( !isset($_SESSION['user']) ) {
+		header("Location: /sign_in.php");
+	}
+	try {
+		$prev = prev_check($db_link, $_SESSION['user']);
+		if ($prev != 1) {
+			header("Location: /sign_in.php");
+		}
+	} catch (Exception $e) {
+		header("Location: /sign_in.php");
+	}
 
 	if(!empty($_POST)) {
 		$suffix = $_POST['suffix'];
-		
-		// suffix check here!
 
 		$conf_id = $_POST['conf_id'];
 		if( !empty( $_POST['conf_about'] ) ) {

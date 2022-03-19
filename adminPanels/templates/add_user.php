@@ -21,10 +21,10 @@
 		height: 100px;
 		border-top-left-radius: 20px;
 		border-top-right-radius: 20px;
+		padding-top: 40px;
 	}
 	.message span {
 		display: block;
-		margin-top: 40px;
 	}
 </style>
 

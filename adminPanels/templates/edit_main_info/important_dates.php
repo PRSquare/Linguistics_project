@@ -52,11 +52,12 @@
 
 	<div class="date_list">
 		<?php 
+			$i = 1;
 			foreach ( $dates as $date ) {
 				print("
 					<div class='date_el list_el'>
 					<form method=\"POST\" action='php/actions/edit_main_info/edit_date.php'>
-						<h3>Дата ".$date['ID_date']."</h3>
+						<h3>Дата ".$i."</h3>
 						<span>от </span>
 						<input type=\"date\" name=\"begin_date\" value='".$date['date_from']."'>
 						<span> до </span>
@@ -88,6 +89,7 @@
 				<div class='small_separator'></div>
 
 				");
+				++$i;
 			}
 		?>
 	</div>

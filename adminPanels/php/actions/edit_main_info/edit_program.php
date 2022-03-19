@@ -7,15 +7,29 @@
 	require_once "../../mysql_connect.php";
 	require_once "../../load_file.php";
 
-	// ../../../konf/dddd.dd.dd/playbill/file.pdf
+	require_once "../../prev_check.php";
 
 	$db_link;
 
 	try {
 		$db_link = connectToDB();
 	} catch (Exception $e) {
-		print_r($e);
-	};
+		header("Location: ".$_SERVER['HTTP_REFERER']."?status=failure");
+	}
+
+	session_start();
+
+	if( !isset($_SESSION['user']) ) {
+		header("Location: /sign_in.php");
+	}
+	try {
+		$prev = prev_check($db_link, $_SESSION['user']);
+		if ($prev != 1) {
+			header("Location: /sign_in.php");
+		}
+	} catch (Exception $e) {
+		header("Location: /sign_in.php");
+	}
 
 	if(!empty($_POST)) {
 		$prog_id = $_POST['prog_id'];
@@ -37,9 +51,12 @@
 			$file_location = "adminPanels/konf/".$folder_name."/playbill/";
 			$file_fin_loc = $file_location.$fname;
 			
+			$filename = safety_db_query( $db_link, "SELECT road_ru, road_en FROM playbill WHERE ID_playbill = ?", "i", $_POST['prog_id'])[0];
+
 			safety_db_query($db_link, "UPDATE playbill SET road_ru = ? WHERE ID_playbill = ?", "si", $file_fin_loc, $prog_id );
 
-			// REMOVE OLD FILES
+			delete_file($db_link, 'playbill', 'road_ru', $filename['road_ru'], "../../../../");
+
 
 		}
 		if( !empty($_FILES['file_en']) ) {
@@ -53,9 +70,11 @@
 			$file_location = "adminPanels/konf/".$folder_name."/playbill/";
 			$file_fin_loc = $file_location.$fname;
 			
+			$filename = safety_db_query( $db_link, "SELECT road_ru, road_en FROM playbill WHERE ID_playbill = ?", "i", $_POST['prog_id'])[0];
+			
 			safety_db_query($db_link, "UPDATE playbill SET road_en = ? WHERE ID_playbill = ?", "si", $file_fin_loc, $prog_id );
 
-			// REMOVE OLD FILES
+			delete_file($db_link, 'playbill', 'road_en', $filename['road_en'], "../../../../");
 		}
 	}
 	header("Location: ".$_SERVER['HTTP_REFERER']);

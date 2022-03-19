@@ -17,14 +17,15 @@
 			$result = password_verify($password, $a['password']);
 			if( $result ) {
 				$_SESSION['user'] = $a['ID_user'];
+
+				if( $a['access_level'] == 1 ) {
+					header("Location: /adminPanels/");
+					exit();
+				}
+
 				break;
 			}
 		}
 	}
-	if( isset($_SESSION['user']) ) {
-		print( $_SESSION['user'] );
-	} else {
-		print( "User not set!" );
-	}
-	header("Location: /");
+	header("Location: ".$_SERVER['HTTP_REFERER']);
 ?>

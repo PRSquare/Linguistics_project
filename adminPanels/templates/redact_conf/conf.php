@@ -32,6 +32,7 @@
 	}
 	.del_conf {
 		color: #600;
+		cursor: pointer;
 	}
 	.conf_data {
 		cursor: pointer;
@@ -64,7 +65,7 @@
 		</div>
 		<div>
 			<a class='red_main' href=<?="'MIR.php?ID=".$conf_id."'"?>>Редактировать общую информацию</a>
-			<a class='del_conf' href="">Удалить конференцию</a>
+			<span class='del_conf' href="" onclick="submit_delete(<?= $conf_id ?>)">Удалить конференцию</span>
 		</div>
 	</div>
 </div>

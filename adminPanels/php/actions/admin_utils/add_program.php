@@ -24,7 +24,7 @@
 		$fname_ru = basename($fname_ru);
 		$fname_en = basename($fname_en);
 
-		$file_location = "adminPanels/konf/".$folder_name."/playbill/";
+		$file_location = "/adminPanels/konf/".$folder_name."/playbill/";
 
 		$file_ru_loc = $file_location.$fname_ru;
 		$file_en_loc = $file_location.$fname_en;

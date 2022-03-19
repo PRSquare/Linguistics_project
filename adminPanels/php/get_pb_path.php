@@ -1,8 +1,8 @@
 <?php
-	require_once "../../mysql_connect.php";
+	include "../../mysql_connect.php";
 
-	function get_pb_path( $conf_id, $db_link, &$folder_name, $folder_to_create ) {
-		$folder_name = safety_db_query( $db_link, "SELECT date_from FROM dates WHERE ID_conf = ? AND text_en REGEXP '^Conference [0-9]{4}$'", "i",
+	function get_pb_path( $conf_id, $db_link, &$folder_name, $folder_to_create = NULL ) {
+		$folder_name = safety_db_query( $db_link, "SELECT date_from FROM dates WHERE ID_conf = ? AND text_en REGEXP 'Conference [0-9]{4}'", "i",
 		$conf_id )[0]['date_from'];
 		$folder_name = str_replace("-", ".", $folder_name);
 

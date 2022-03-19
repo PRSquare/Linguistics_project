@@ -3,6 +3,13 @@
 	require "php/mysql_connect.php";
 	require "php/prev_check.php";
 
+	$db_link;
+
+	try {
+		$db_link = connectToDB();
+	} catch (Exception $e) {
+		header("Location: ".$_SERVER['HTTP_REFERER']."?status=failure");
+	}
 
 	session_start();
 
@@ -10,7 +17,7 @@
 		header("Location: /sign_in.php");
 	}
 	try {
-		$prev = prev_check($_SESSION['user']);
+		$prev = prev_check($db_link, $_SESSION['user']);
 		if ($prev != 1) {
 			header("Location: /sign_in.php");
 		}
@@ -18,12 +25,12 @@
 		header("Location: /sign_in.php");
 	}
 
-	$db_link;
 
-	try {
-		$db_link = connectToDB();
-	} catch (Exception $e) {
-		print("Error");
+	function cmp_confs($a, $b) {
+		if( $a['date'] == $b['date'] ) {
+			return 0;
+		}
+		return $a['date'] < $b['date'] ? -1 : 1;
 	}
 
 	$confs_info = safety_db_query( $db_link, "SELECT * FROM conferences" );
@@ -32,10 +39,18 @@
 		$c_id = $c_inf['ID_conf'];
 		$c_date = safety_db_query( $db_link, "SELECT * FROM dates WHERE ID_conf = ? AND text_en REGEXP '^Conference [0-9]{4}$'",
 			 "i", $c_id )[0]['date_from'];
-		$c = renderTemplate( 'templates/redact_conf/conf.php', ['conf_date' => $c_date, 'conf_id'=>$c_id] );
-		array_push($confs, $c);
+		array_push($confs, ['date' => $c_date, 'id' => $c_id]);
 	}
-	$content = renderTemplate( 'templates/redact_conf.php', ['confs' => $confs] );
+
+
+	usort($confs, 'cmp_confs');
+	
+	$confs_templates = [];
+	foreach ($confs as $conf) {
+		$c = renderTemplate( 'templates/redact_conf/conf.php', [ 'conf_date' => $conf['date'], 'conf_id'=>$conf['id'] ] );
+		array_push($confs_templates, $c);
+	}
+	$content = renderTemplate( 'templates/redact_conf.php', ['confs' => $confs_templates] );
 
 	$op_css = [];
 	$op_js = [];

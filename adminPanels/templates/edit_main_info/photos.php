@@ -61,7 +61,7 @@
 		<form method="POST" enctype="multipart/form-data" action="php/actions/edit_main_info/add_photo.php">
 			<input type="hidden" name="conf_id" value=<?="'".$conf_id."'"?>>
 			
-			<input required type="file" name="photo">
+			<input required multiple type="file" name="photo[]">
 			<input class="new_file_button" type="submit" value="Загрузить фотографии">
 		</form>
 	</div>

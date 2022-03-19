@@ -142,8 +142,16 @@
         while(($row = mysqli_fetch_assoc($feedBD)) != false){
             if($row['feedback_'.$_SESSION["lang"]]!=''&&$row['Name_feedback_'.$_SESSION["lang"]]!=''){
                 $feedback.="<div class='feedback'>
-                <h4>".$row['Name_feedback_'.$_SESSION["lang"]]."</h4>"."<h5>".$row['post_'.$_SESSION["lang"]]."</h5>";
-            
+                <h4>".$row['Name_feedback_'.$_SESSION["lang"]]."</h4>";
+                
+                $feedback .= "<div class='feedback__rating'><span>";
+                for( $i = 0; $i < $row['rating']; ++$i ) {
+                    $feedback .= "★";
+                }
+                $feedback .= "</span></div>";
+
+                $feedback .= "<h5>".$row['post_'.$_SESSION["lang"]]."</h5>";
+
                 $in = $row['feedback_'.$_SESSION["lang"]];
                 $plak=explode(PHP_EOL,$in);
                 foreach($plak as $key => $val){
